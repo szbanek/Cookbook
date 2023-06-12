@@ -12,6 +12,18 @@ import androidx.fragment.app.Fragment
 
 class RecipeDetailFragment : Fragment() {
     private var recipeId: Long = 0
+
+    override fun onCreate(savedInstanceState : Bundle?) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            recipeId = savedInstanceState.getLong("recipeId")
+        }
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle){
+        savedInstanceState.putLong("recipeId", recipeId)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

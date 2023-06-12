@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -26,10 +28,21 @@ class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
     }
 
     override fun itemClicked(id: Long) {
-        Log.d("MainActivity", "Przypisane id: $id")
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_recipe_ID, id)
-        startActivity(intent)
+        val fragmentContainer = findViewById(R.id.detail_fragment) as? View
+        if (fragmentContainer != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            val frag = RecipeDetailFragment()
+            frag.setRecipe(id)
+            transaction.replace(R.id.detail_fragment, frag)
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        } else {
+            Log.d("MainActivity", "Przypisane id: $id")
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_recipe_ID, id)
+            startActivity(intent)
+        }
     }
 
 }
