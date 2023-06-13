@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import com.example.recipes2.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
             val frag = RecipeDetailFragment()
             frag.setRecipe(id)
             transaction.replace(R.id.detail_fragment, frag)
+            transaction.replace(R.id.stoper_container, StoperFragment())
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             transaction.addToBackStack(null)
             transaction.commit()

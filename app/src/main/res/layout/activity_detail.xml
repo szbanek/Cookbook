@@ -21,6 +21,11 @@
             android:id="@+id/detail_frag"
             class="com.example.recipes2.RecipeDetailFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/stoper_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
