@@ -1,17 +1,14 @@
 package com.example.recipes2
 
-//import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
@@ -24,6 +21,13 @@ class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
                 .replace(R.id.container, RecipeListFragment())
                 .commit()
         }
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        val pager = findViewById<View>(R.id.pager) as ViewPager
+        pager.adapter = pagerAdapter
+        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
+        tabLayout.setupWithViewPager(pager)
     }
 
     override fun itemClicked(id: Long) {

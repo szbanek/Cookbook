@@ -17,6 +17,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <include
+            layout="@layout/toolbar_main"
+            android:id="@+id/toolbar" />
+
         <fragment
             android:id="@+id/detail_frag"
             class="com.example.recipes2.RecipeDetailFragment"
