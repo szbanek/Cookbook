@@ -6,19 +6,31 @@
     android:orientation="vertical"
     tools:context=".TopFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="title_top" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@android:id/list"/>
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_text"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <fragment
+            android:id="@+id/meatballFragment"
+            class="com.example.recipes2.MeatballFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:layout="@layout/fragment_meatball" />
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

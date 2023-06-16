@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 
 
 class StoperFragment : Fragment(), View.OnClickListener {
-    private var seconds: Int = 0
+    private var seconds: Int = 60
     private var running: Boolean = false
     private var wasRunning: Boolean = false
     lateinit var hoursView: TextView

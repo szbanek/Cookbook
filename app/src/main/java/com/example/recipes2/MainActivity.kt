@@ -17,11 +17,6 @@ class MainActivity : AppCompatActivity(),  Tab1Fragment.ItemListenerActivity, Ta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, RecipeListFragment())
-//                .commit()
-//        }
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -30,25 +25,6 @@ class MainActivity : AppCompatActivity(),  Tab1Fragment.ItemListenerActivity, Ta
         val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(pager)
     }
-
-//    override fun itemClicked(id: Long) {
-//        val fragmentContainer = findViewById(R.id.detail_fragment) as? View
-//        if (fragmentContainer != null) {
-//            val transaction = supportFragmentManager.beginTransaction()
-//            val frag = RecipeDetailFragment()
-//            frag.setRecipe(id, 0)
-//            transaction.replace(R.id.detail_fragment, frag)
-//            transaction.replace(R.id.stoper_container, StoperFragment())
-//            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//            transaction.addToBackStack(null)
-//            transaction.commit()
-//        } else {
-//            Log.d("MainActivity", "Przypisane id: $id")
-//            val intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, id)
-//            startActivity(intent)
-//        }
-//    }
 
     override fun onItemClicked(id: Long, tab: Int) {
         Log.i("RECIPES", id.toString())
@@ -61,6 +37,11 @@ class MainActivity : AppCompatActivity(),  Tab1Fragment.ItemListenerActivity, Ta
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             transaction.addToBackStack(null)
             transaction.commit()
+            val stoper = StoperFragment()
+            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+            ft.add(R.id.stoper_container, stoper)
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            ft.commit()
         } else {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, id)
