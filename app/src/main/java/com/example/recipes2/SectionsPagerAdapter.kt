@@ -23,8 +23,8 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
             0 -> "Start"
-            1 -> "Kategoria 1"
-            2 -> "Kategoria 2"
+            1 -> "Śniadaniowe"
+            2 -> "Obiadowe"
             else -> throw IllegalArgumentException("Invalid page position: $position")
         }
     }

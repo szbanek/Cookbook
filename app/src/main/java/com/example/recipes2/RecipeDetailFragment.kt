@@ -5,22 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 
 class RecipeDetailFragment : Fragment() {
     private var recipeId: Long = 0
+    private var tabId: Int = 0
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             recipeId = savedInstanceState.getLong("recipeId")
+            tabId = savedInstanceState.getInt("tabId")
         }
     }
 
     override fun onSaveInstanceState(savedInstanceState: Bundle){
         savedInstanceState.putLong("recipeId", recipeId)
+        savedInstanceState.putInt("tabId", tabId)
     }
 
     override fun onCreateView(
@@ -32,25 +36,23 @@ class RecipeDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
     }
 
-    fun setRecipe(Id: Long)
+    fun setRecipe(Id: Long, tab: Int)
     {
         recipeId = Id
+        tabId = tab
         Log.d("recipeDetailFragment", "Received recipe ID: $recipeId")
-        onResume()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         val view = view
-        Log.d("recipeDetailFragment", "OnStart ready: $recipeId")
         if (view != null) {
-            Log.d("recipeDetailFragment", "--Received recipe ID: $recipeId")
             val title = view.findViewById<View>(R.id.textTitle) as TextView
-            val recipe = Recipe.recipes[recipeId.toInt()]
+            val recipe = Recipe.recipes[tabId][recipeId.toInt()]
             title.text = recipe.fetchName()
-            Log.d("recipeDetailFragment", "Title: ${title.text}")
+            val image = view.findViewById<ImageView>(R.id.recipe_image)
+            image?.setImageResource(recipe.getImageId())
             val description = view.findViewById<View>(R.id.textDescription) as TextView
-            Log.d("recipeDetailFragment", "Description: ${description.text}")
             description.text = recipe.getRecipe()
         }
         else{

@@ -21,7 +21,7 @@ class RecipeListFragment : ListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val names = Array(Recipe.recipes.size) { i ->
-            Recipe.recipes[i].fetchName()
+            Recipe.recipes[0][i].fetchName()
         }
         val adapter = ArrayAdapter(inflater.context, android.R.layout.simple_list_item_1, names)
         listAdapter = adapter
